@@ -52,12 +52,36 @@ def genomsnittlig_längd(sentences):
     medelvärde = int(sum(medelvärde) / len(words))
     return medelvärde
 
-def main():
-    
+def längsta_kortaste(sentences):
+    text = ' '.join(sentences)
+    text = text.strip()
+    words = text.split(' ')
+    längsta = ''
+    kortaste = 'långt_ord'
+    for i in words:
+        if len(i) > len(längsta):
+            längsta = i
+        elif len(i) < len(kortaste):
+            kortaste = i
+    return längsta, kortaste
+
+def unika_ord(sentences):
+    text = ' '.join(sentences)
+    text = text.strip()
+    words = text.split(' ')
+    antal_unika = 0
+    for i in words:
+        if words.count(i) == 1:
+            antal_unika +=1
+    return antal_unika
+
+def main():    
     sentences = read_from_file("en_resa_genom_svenska_skogen.txt") # Här har du nu en lista av strängar från den inlästa filen.
     print(antal_ord(sentences))
     print(frekventa_ord(sentences))
     print(genomsnittlig_längd(sentences))
+    print(längsta_kortaste(sentences))
+    print(unika_ord(sentences))
     
 if __name__ == "__main__":
     main()
